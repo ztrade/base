@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/SuperGod/trademodel"
 	"github.com/shopspring/decimal"
+	. "github.com/ztrade/trademodel"
 )
 
 func calFee(fee decimal.Decimal, trades ...Trade) float64 {

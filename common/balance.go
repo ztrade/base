@@ -3,8 +3,8 @@ package common
 import (
 	"errors"
 
-	. "github.com/SuperGod/trademodel"
 	"github.com/shopspring/decimal"
+	. "github.com/ztrade/trademodel"
 )
 
 var (

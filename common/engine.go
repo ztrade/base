@@ -1,6 +1,6 @@
 package common
 
-import "github.com/SuperGod/trademodel"
+import "github.com/ztrade/trademodel"
 
 type CandleFn func(candle trademodel.Candle)
 

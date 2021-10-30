@@ -1,9 +1,9 @@
 package engine
 
 import (
-	"github.com/SuperGod/indicator"
-	"github.com/SuperGod/trademodel"
 	"github.com/ztrade/base/common"
+	"github.com/ztrade/indicator"
+	"github.com/ztrade/trademodel"
 )
 
 type Engine interface {

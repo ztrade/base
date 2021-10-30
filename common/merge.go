@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	. "github.com/SuperGod/trademodel"
 	log "github.com/sirupsen/logrus"
+	. "github.com/ztrade/trademodel"
 )
 
 // MergeKlineChan merge kline data

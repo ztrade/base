@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/SuperGod/trademodel"
+	. "github.com/ztrade/trademodel"
 )
 
 func getTestData(source, dst time.Duration) (candles CandleList) {
