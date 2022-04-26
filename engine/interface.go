@@ -25,6 +25,6 @@ type Engine interface {
 
 	// call for goscript
 	UpdatePosition(pos, price float64)
-	OnCandle(candle trademodel.Candle)
+	OnCandle(candle *trademodel.Candle)
 	UpdateBalance(balance float64)
 }

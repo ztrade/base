@@ -2,7 +2,7 @@ package common
 
 import "github.com/ztrade/trademodel"
 
-type CandleFn func(candle trademodel.Candle)
+type CandleFn func(candle *trademodel.Candle)
 
 type Param struct {
 	Name string
