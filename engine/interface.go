@@ -3,7 +3,12 @@ package engine
 import (
 	"github.com/ztrade/base/common"
 	"github.com/ztrade/indicator"
-	"github.com/ztrade/trademodel"
+)
+
+const (
+	StatusRunning = 0
+	StatusSuccess = 1
+	StatusFail    = -1
 )
 
 type Engine interface {
@@ -22,9 +27,5 @@ type Engine interface {
 	SendNotify(content, contentType string)
 	Merge(src, dst string, fn common.CandleFn)
 	SetBalance(balance float64)
-
-	// call for goscript
-	UpdatePosition(pos, price float64)
-	OnCandle(candle *trademodel.Candle)
-	UpdateBalance(balance float64)
+	UpdateStatus(status int, msg string)
 }
