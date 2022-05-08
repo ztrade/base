@@ -12,12 +12,13 @@ const (
 )
 
 type Engine interface {
-	OpenLong(price, amount float64)
-	CloseLong(price, amount float64)
-	OpenShort(price, amount float64)
-	CloseShort(price, amount float64)
-	StopLong(price, amount float64)
-	StopShort(price, amount float64)
+	OpenLong(price, amount float64) string
+	CloseLong(price, amount float64) string
+	OpenShort(price, amount float64) string
+	CloseShort(price, amount float64) string
+	StopLong(price, amount float64) string
+	StopShort(price, amount float64) string
+	CancelOrder(string)
 	CancelAllOrder()
 	AddIndicator(name string, params ...int) (ind indicator.CommonIndicator)
 	Position() (pos, price float64)
