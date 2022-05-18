@@ -4,10 +4,17 @@ import "github.com/ztrade/trademodel"
 
 type CandleFn func(candle *trademodel.Candle)
 
+type Entry struct {
+	Value string
+	Label string
+}
+
 type Param struct {
-	Name string
-	Type string
-	Info string
+	Name  string
+	Type  string
+	Label string
+	Info  string
+	Enums []Entry
 }
 
 type ParamData map[string]interface{}

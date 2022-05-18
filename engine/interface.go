@@ -3,6 +3,7 @@ package engine
 import (
 	"github.com/ztrade/base/common"
 	"github.com/ztrade/indicator"
+	"github.com/ztrade/trademodel"
 )
 
 const (
@@ -20,6 +21,7 @@ type Engine interface {
 	StopShort(price, amount float64) string
 	CancelOrder(string)
 	CancelAllOrder()
+	DoOrder(typ trademodel.TradeType, price, amount float64) string
 	AddIndicator(name string, params ...int) (ind indicator.CommonIndicator)
 	Position() (pos, price float64)
 	Balance() float64
