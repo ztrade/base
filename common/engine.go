@@ -24,42 +24,22 @@ type Param struct {
 	ptr      interface{}
 }
 
-func StringParam(name, label, info, defValue string, ptr *string) Param {
-	*ptr = defValue
-	return Param{Name: name, Type: "string", Label: label, Info: info, DefValue: defValue, ptr: ptr}
-}
-
-func StringEnumParam(name, label, info, defValue string, enums []Entry, ptr *string) Param {
+func StringParam(name, label, info, defValue string, ptr *string, enums ...Entry) Param {
 	*ptr = defValue
 	return Param{Name: name, Type: "string", Label: label, Info: info, DefValue: defValue, Enums: enums, ptr: ptr}
 }
 
-func IntParam(name, label, info string, defValue int, ptr *int) Param {
-	*ptr = defValue
-	return Param{Name: name, Type: "int", Label: label, Info: info, DefValue: defValue, ptr: ptr}
-}
-
-func IntEnumParam(name, label, info string, defValue int, enums []Entry, ptr *int) Param {
+func IntParam(name, label, info string, defValue int, ptr *int, enums ...Entry) Param {
 	*ptr = defValue
 	return Param{Name: name, Type: "int", Label: label, Info: info, DefValue: defValue, Enums: enums, ptr: ptr}
 }
 
-func FloatParam(name, label, info string, defValue float64, ptr *float64) Param {
-	*ptr = defValue
-	return Param{Name: name, Type: "float", Label: label, Info: info, DefValue: defValue, ptr: ptr}
-}
-
-func FloatEnumParam(name, label, info string, defValue float64, enums []Entry, ptr *float64) Param {
+func FloatParam(name, label, info string, defValue float64, ptr *float64, enums ...Entry) Param {
 	*ptr = defValue
 	return Param{Name: name, Type: "float", Label: label, Info: info, DefValue: defValue, Enums: enums, ptr: ptr}
 }
 
-func BoolParam(name, label, info string, defValue bool, ptr *bool) Param {
-	*ptr = defValue
-	return Param{Name: name, Type: "bool", Label: label, Info: info, DefValue: defValue, ptr: ptr}
-}
-
-func BoolEnumParam(name, label, info string, defValue bool, enums []Entry, ptr *bool) Param {
+func BoolParam(name, label, info string, defValue bool, ptr *bool, enums ...Entry) Param {
 	*ptr = defValue
 	return Param{Name: name, Type: "bool", Label: label, Info: info, DefValue: defValue, Enums: enums, ptr: ptr}
 }

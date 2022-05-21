@@ -10,20 +10,17 @@ func TestParam(t *testing.T) {
 	var float1, float2 float64
 	params := []Param{
 		StringParam("str1", "str test", "just a simple string", "a", &str1),
-		StringEnumParam("str2", "str test", "enum string", "B", []Entry{
-			{Label: "A", Value: "A"},
-			{Label: "B", Value: "B"},
-		}, &str2),
+		StringParam("str2", "str test", "enum string", "B", &str2,
+			Entry{Label: "A", Value: "A"},
+			Entry{Label: "B", Value: "B"}),
 		IntParam("int1", "int1 test", "just a simple int", 1, &int1),
-		IntEnumParam("int2", "int2 test", "enum int", 1, []Entry{
-			{Label: "A", Value: 1},
-			{Label: "B", Value: 2},
-		}, &int2),
+		IntParam("int2", "int2 test", "enum int", 1, &int2,
+			Entry{Label: "A", Value: 1},
+			Entry{Label: "B", Value: 2}),
 		FloatParam("float1", "float1 test", "just a simple int", 1, &float1),
-		FloatEnumParam("float2", "float2 test", "enum float", 1, []Entry{
-			{Label: "A", Value: 1.0},
-			{Label: "B", Value: 2.0},
-		}, &float2),
+		FloatParam("float2", "float2 test", "enum float", 1, &float2,
+			Entry{Label: "A", Value: 1.0},
+			Entry{Label: "B", Value: 2.0}),
 	}
 
 	str := `{"str1": "str1", "str2":"A", "int1": 10, "int2": 1, "float1": 3, "float2": 2.0}`
