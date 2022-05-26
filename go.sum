@@ -18,6 +18,8 @@ github.com/ztrade/trademodel v1.1.3 h1:qPHeHPLyKNU846rXym1vnZ2G39gD70Gg4pHqYszsq
 github.com/ztrade/trademodel v1.1.3/go.mod h1:iIdDUPeAjlmQ2D7dxqrwwFwGCFOdk35eogvWGkf+0Lw=
 github.com/ztrade/trademodel v1.1.4 h1:mDOl9RojWW3JxoA1ODuputElM9iTbx6dHOdLrzzuO1I=
 github.com/ztrade/trademodel v1.1.4/go.mod h1:iIdDUPeAjlmQ2D7dxqrwwFwGCFOdk35eogvWGkf+0Lw=
+github.com/ztrade/trademodel v1.1.5 h1:r5M5vfbdBSzEheetXunw2WxTxE9e5ZeKe8psjOvASmw=
+github.com/ztrade/trademodel v1.1.5/go.mod h1:iIdDUPeAjlmQ2D7dxqrwwFwGCFOdk35eogvWGkf+0Lw=
 golang.org/x/sys v0.0.0-20191026070338-33540a1f6037/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20220422013727-9388b58f7150 h1:xHms4gcpe1YE7A3yIllJXP16CMAGuqwO2lX1mTyyRRc=
 golang.org/x/sys v0.0.0-20220422013727-9388b58f7150/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
