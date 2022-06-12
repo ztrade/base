@@ -12,9 +12,10 @@ var (
 )
 
 type VBalance struct {
-	total    decimal.Decimal
-	position decimal.Decimal
-	feeTotal decimal.Decimal
+	total          decimal.Decimal
+	prevRoundTotal decimal.Decimal
+	position       decimal.Decimal
+	feeTotal       decimal.Decimal
 	//  开仓的总价值
 	longCost  decimal.Decimal
 	shortCost decimal.Decimal
@@ -25,12 +26,14 @@ type VBalance struct {
 func NewVBalance() *VBalance {
 	b := new(VBalance)
 	b.total = decimal.NewFromFloat(100000)
+	b.prevRoundTotal = b.total
 	b.fee = decimal.NewFromFloat(0.00075)
 	return b
 }
 
 func (b *VBalance) Set(total float64) {
 	b.total = decimal.NewFromFloat(total)
+	b.prevRoundTotal = b.total
 }
 
 func (b *VBalance) SetFee(fee float64) {
@@ -72,7 +75,6 @@ func (b *VBalance) AddTrade(tr Trade) (profit, onceFee float64, err error) {
 		b.shortCost = b.shortCost.Add(cost)
 	}
 	isPositionZero := b.position.Equal(decimal.NewFromInt(0))
-	// !TODO: 开仓后要修改total
 	if tr.Action.IsOpen() && !isPositionZero {
 		b.total = b.total.Sub(cost)
 	}
@@ -81,14 +83,11 @@ func (b *VBalance) AddTrade(tr Trade) (profit, onceFee float64, err error) {
 	if isPositionZero {
 		totalFee := fee.Add(b.prevFee)
 		prof := b.shortCost.Sub(b.longCost).Sub(totalFee)
-		if tr.Action.IsLong() {
-			b.total = b.total.Add(b.shortCost).Add(prof)
-		} else {
-			b.total = b.total.Add(b.longCost).Add(prof)
-		}
+		b.total = b.prevRoundTotal.Add(prof)
 		profit, _ = prof.Float64()
 		b.longCost = decimal.NewFromInt(0)
 		b.shortCost = decimal.NewFromInt(0)
+		b.prevRoundTotal = b.total
 	}
 	b.prevFee = fee
 	return
