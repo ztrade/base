@@ -76,7 +76,7 @@ func (b *VBalance) AddTrade(tr Trade) (profit, onceFee float64, err error) {
 	}
 	isPositionZero := b.position.Equal(decimal.NewFromInt(0))
 	if tr.Action.IsOpen() && !isPositionZero {
-		b.total = b.total.Sub(cost)
+		b.total = b.total.Sub(cost).Sub(fee)
 	}
 	b.feeTotal = b.feeTotal.Add(fee)
 	// 计算盈利
