@@ -33,11 +33,12 @@ func MergeKlineChan(klines chan []interface{}, srcDuration, dstDuration time.Dur
 
 // KlineMerge merge kline to new duration
 type KlineMerge struct {
-	src    int64      // src kline seconds
-	dst    int64      // dst kline seconds
-	ratio  int        // dst/src kline ration
-	cache  CandleList // kline cache
-	bFirst bool
+	src       int64      // src kline seconds
+	dst       int64      // dst kline seconds
+	ratio     int        // dst/src kline ration
+	cache     CandleList // kline cache
+	bFirst    bool
+	nextStart int64
 }
 
 // NewKlineMergeStr new KlineMerge with string duration
@@ -116,10 +117,19 @@ func (km *KlineMerge) Update(data interface{}) (ret interface{}) {
 		return
 	}
 	km.bFirst = false
+	var bNew bool
+	if candle.Start >= km.nextStart {
+		km.nextStart = (candle.Start/km.dst + 1) * km.dst
+		if n != 0 {
+			ret = km.cache.Merge()
+			km.cache = CandleList{}
+			bNew = true
+		}
+	}
 	// add current candle to cache
 	index := int(candle.Start%km.dst)/int(km.src) + 1
 	km.cache = append(km.cache, candle)
-	if index != km.ratio {
+	if bNew || index != km.ratio {
 		return
 	}
 	defer func() {
@@ -128,8 +138,8 @@ func (km *KlineMerge) Update(data interface{}) (ret interface{}) {
 	}()
 	// cache length not match,just skip
 	if len(km.cache) != km.ratio {
-		log.Infof("cache length not match, skip %d %d", len(km.cache), km.ratio)
-		return
+		log.Warnf("cache length not match,real:%d, want:%d", len(km.cache), km.ratio)
+		// return
 	}
 	ret = km.cache.Merge()
 	return
