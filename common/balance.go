@@ -88,7 +88,9 @@ func (b *VBalance) AddTrade(tr Trade) (profit, onceFee float64, err error) {
 		b.longCost = decimal.NewFromInt(0)
 		b.shortCost = decimal.NewFromInt(0)
 		b.prevRoundTotal = b.total
+		b.prevFee = decimal.Zero
+	} else {
+		b.prevFee = b.prevFee.Add(fee)
 	}
-	b.prevFee = fee
 	return
 }
