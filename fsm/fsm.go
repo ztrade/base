@@ -12,7 +12,7 @@ type EventDesc struct {
 	Name string
 	Src  string
 	Dst  string
-	Args interface{}
+	Args []interface{}
 }
 
 type Callback func(event EventDesc)
