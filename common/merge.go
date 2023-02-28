@@ -144,3 +144,10 @@ func (km *KlineMerge) Update(data interface{}) (ret interface{}) {
 	ret = km.cache.Merge()
 	return
 }
+
+func (km *KlineMerge) GetUnFinished() (ret interface{}) {
+	if len(km.cache) == 0 {
+		return nil
+	}
+	return km.cache.Merge()
+}

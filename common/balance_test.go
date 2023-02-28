@@ -200,3 +200,55 @@ func TestMultiShort(t *testing.T) {
 		t.Fatal("balance stop error:", b.Get())
 	}
 }
+
+func TestAvgPriceLong(t *testing.T) {
+	tm := time.Now()
+	openTrade := Trade{
+		ID:     "1",
+		Action: OpenLong,
+		Time:   tm,
+		Price:  110,
+		Amount: 1,
+	}
+	openTrade2 := Trade{
+		ID:     "1",
+		Action: OpenLong,
+		Time:   tm,
+		Price:  120,
+		Amount: 3,
+	}
+
+	b := NewVBalance()
+	b.Set(1000)
+	b.AddTrade(openTrade)
+	b.AddTrade(openTrade2)
+	if b.AvgOpenPrice() != 117.5 {
+		t.Fatalf("cal avg failed: %f", b.AvgOpenPrice())
+	}
+}
+
+func TestAvgPriceShort(t *testing.T) {
+	tm := time.Now()
+	openTrade := Trade{
+		ID:     "1",
+		Action: OpenShort,
+		Time:   tm,
+		Price:  110,
+		Amount: 1,
+	}
+	openTrade2 := Trade{
+		ID:     "1",
+		Action: OpenShort,
+		Time:   tm,
+		Price:  120,
+		Amount: 3,
+	}
+
+	b := NewVBalance()
+	b.Set(1000)
+	b.AddTrade(openTrade)
+	b.AddTrade(openTrade2)
+	if b.AvgOpenPrice() != 117.5 {
+		t.Fatalf("cal avg failed: %f", b.AvgOpenPrice())
+	}
+}

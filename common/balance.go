@@ -56,6 +56,19 @@ func (b *VBalance) GetFeeTotal() (fee float64) {
 	return
 }
 
+func (b *VBalance) AvgOpenPrice() (price float64) {
+	switch b.position.Sign() {
+	case -1:
+		price, _ = b.shortCost.Div(b.position.Abs()).Float64()
+	case 0:
+		return
+	case 1:
+		price, _ = b.longCost.Div(b.position.Abs()).Float64()
+	}
+
+	return
+}
+
 func (b *VBalance) AddTrade(tr Trade) (profit, onceFee float64, err error) {
 	amount := decimal.NewFromFloat(tr.Amount).Abs()
 	// 仓位价值
