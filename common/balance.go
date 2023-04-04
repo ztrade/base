@@ -9,6 +9,7 @@ import (
 
 var (
 	ErrNoBalance = errors.New("no balance")
+	Zero         = decimal.NewFromInt(0)
 )
 
 type VBalance struct {
@@ -80,6 +81,10 @@ func (b *VBalance) AddTrade(tr Trade) (profit, onceFee float64, err error) {
 		err = ErrNoBalance
 		return
 	}
+	// close/stop just return if no position
+	if b.position.Equal(Zero) && !tr.Action.IsOpen() {
+		return
+	}
 	if tr.Action.IsLong() {
 		b.position = b.position.Add(amount)
 		b.longCost = b.longCost.Add(cost)
@@ -87,7 +92,7 @@ func (b *VBalance) AddTrade(tr Trade) (profit, onceFee float64, err error) {
 		b.position = b.position.Sub(amount)
 		b.shortCost = b.shortCost.Add(cost)
 	}
-	isPositionZero := b.position.Equal(decimal.NewFromInt(0))
+	isPositionZero := b.position.Equal(Zero)
 	if tr.Action.IsOpen() && !isPositionZero {
 		b.total = b.total.Sub(cost).Sub(fee)
 	}
