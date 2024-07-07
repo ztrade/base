@@ -27,7 +27,7 @@ type Engine interface {
 	Balance() float64
 	Log(v ...interface{})
 	Watch(watchType string)
-	SendNotify(content, contentType string)
+	SendNotify(title, content, contentType string)
 	Merge(src, dst string, fn common.CandleFn)
 	SetBalance(balance float64)
 	UpdateStatus(status int, msg string)
