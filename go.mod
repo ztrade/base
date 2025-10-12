@@ -1,14 +1,14 @@
 module github.com/ztrade/base
 
-go 1.18
+go 1.24.0
 
 require (
-	github.com/bitly/go-simplejson v0.5.0
-	github.com/shopspring/decimal v1.3.1
-	github.com/sirupsen/logrus v1.8.1
-	github.com/stretchr/testify v1.2.2
+	github.com/bitly/go-simplejson v0.5.1
+	github.com/shopspring/decimal v1.4.0
+	github.com/sirupsen/logrus v1.9.3
+	github.com/stretchr/testify v1.7.0
 	github.com/ztrade/indicator v1.1.1
-	github.com/ztrade/trademodel v1.1.5
+	github.com/ztrade/trademodel v1.1.6
 )
 
 require (
@@ -16,5 +16,5 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/kr/pretty v0.3.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	golang.org/x/sys v0.0.0-20220422013727-9388b58f7150 // indirect
+	golang.org/x/sys v0.37.0 // indirect
 )
