@@ -11,7 +11,7 @@ func TestCheckLiquidationLong(t *testing.T) {
 	lb.Set(100)
 	lb.SetFee(0.0002)
 	lb.SetLever(10)
-	_, _, err := lb.AddTrade(Trade{Action: OpenLong, Price: 100, Amount: 9})
+	_, _, _, err := lb.AddTrade(Trade{Action: OpenLong, Price: 100, Amount: 9})
 	if err != nil {
 		t.Fatal("Liq lever AddTrade failed:" + err.Error())
 	}
@@ -32,7 +32,7 @@ func TestCheckLiquidationShort(t *testing.T) {
 	lb.Set(100)
 	lb.SetFee(0.0002)
 	lb.SetLever(10)
-	_, _, err := lb.AddTrade(Trade{Action: OpenShort, Price: 100, Amount: 9})
+	_, _, _, err := lb.AddTrade(Trade{Action: OpenShort, Price: 100, Amount: 9})
 	if err != nil {
 		t.Fatal("Liq lever AddTrade failed:" + err.Error())
 	}
@@ -53,7 +53,7 @@ func TestCheckLeverBalance(t *testing.T) {
 	lb.Set(100)
 	lb.SetFee(0.0002)
 	lb.SetLever(10)
-	_, _, err := lb.AddTrade(Trade{Action: OpenLong, Price: 100, Amount: 10})
+	_, _, _, err := lb.AddTrade(Trade{Action: OpenLong, Price: 100, Amount: 10})
 	if err == nil {
 		t.Fatal("Liq not work")
 	}

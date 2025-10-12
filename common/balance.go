@@ -57,20 +57,26 @@ func (b *VBalance) GetFeeTotal() (fee float64) {
 	return
 }
 
-func (b *VBalance) AvgOpenPrice() (price float64) {
+func (b *VBalance) AvgOpenPriceDec() (price decimal.Decimal) {
 	switch b.position.Sign() {
 	case -1:
-		price, _ = b.shortCost.Div(b.position.Abs()).Float64()
+		return b.shortCost.Div(b.position.Abs())
 	case 0:
 		return
 	case 1:
-		price, _ = b.longCost.Div(b.position.Abs()).Float64()
+		return b.longCost.Div(b.position.Abs())
 	}
-
 	return
 }
 
-func (b *VBalance) AddTrade(tr Trade) (profit, onceFee float64, err error) {
+func (b *VBalance) AvgOpenPrice() (price float64) {
+	price, _ = b.AvgOpenPriceDec().Float64()
+	return
+}
+
+func (b *VBalance) AddTrade(tr Trade) (profit, profitRate, onceFee float64, err error) {
+	// 新的Trade会改变仓位，所以先记录之前的均价
+	prevAvgOpenPrice := b.AvgOpenPriceDec()
 	amount := decimal.NewFromFloat(tr.Amount).Abs()
 	// 仓位价值
 	cost := amount.Mul(decimal.NewFromFloat(tr.Price)).Abs()
@@ -103,6 +109,7 @@ func (b *VBalance) AddTrade(tr Trade) (profit, onceFee float64, err error) {
 		prof := b.shortCost.Sub(b.longCost).Sub(totalFee)
 		b.total = b.prevRoundTotal.Add(prof)
 		profit, _ = prof.Float64()
+		profitRate, _ = prof.Div(prevAvgOpenPrice).Float64()
 		b.longCost = decimal.NewFromInt(0)
 		b.shortCost = decimal.NewFromInt(0)
 		b.prevRoundTotal = b.total

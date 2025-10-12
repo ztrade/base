@@ -96,7 +96,7 @@ func (b *LeverBalance) GetFeeTotal() float64 {
 	return b.vBalance.GetFeeTotal()
 }
 
-func (b *LeverBalance) AddTrade(tr Trade) (profit, onceFee float64, err error) {
+func (b *LeverBalance) AddTrade(tr Trade) (profit, profitRate, onceFee float64, err error) {
 	if tr.Action.IsOpen() {
 		// check balance enough when open order
 		amount := decimal.NewFromFloat(tr.Amount).Abs()
@@ -113,7 +113,7 @@ func (b *LeverBalance) AddTrade(tr Trade) (profit, onceFee float64, err error) {
 			tr.Price = liqPrice
 		}
 	}
-	profit, onceFee, err = b.vBalance.AddTrade(tr)
+	profit, profitRate, onceFee, err = b.vBalance.AddTrade(tr)
 	if err != nil {
 		return
 	}

@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/shopspring/decimal"
+	"github.com/stretchr/testify/assert"
 	. "github.com/ztrade/trademodel"
 )
 
@@ -250,5 +251,60 @@ func TestAvgPriceShort(t *testing.T) {
 	b.AddTrade(openTrade2)
 	if b.AvgOpenPrice() != 117.5 {
 		t.Fatalf("cal avg failed: %f", b.AvgOpenPrice())
+	}
+}
+
+func TestProfitRateLong(t *testing.T) {
+	tm := time.Now()
+	openTrade := Trade{
+		ID:     "1",
+		Action: OpenLong,
+		Time:   tm,
+		Price:  100,
+		Amount: 1,
+	}
+	openTrade2 := Trade{
+		ID:     "1",
+		Action: OpenLong,
+		Time:   tm,
+		Price:  105,
+		Amount: 1,
+	}
+	closeTrade := Trade{
+		ID:     "2",
+		Action: CloseLong,
+		Time:   tm.Add(time.Second),
+		Price:  110,
+		Amount: 2,
+	}
+	stopTrade := Trade{
+		ID:     "3",
+		Action: StopLong,
+		Time:   tm.Add(time.Second * 2),
+		Price:  90,
+		Amount: 2,
+	}
+
+	b := NewVBalance()
+	b.Set(1000)
+	b.AddTrade(openTrade)
+	b.AddTrade(openTrade2)
+	avgPrice := b.AvgOpenPrice()
+	profit, profitRate, onceFee, err := b.AddTrade(closeTrade)
+	fee := calFee(b.fee, openTrade, openTrade2, closeTrade)
+	if b.Get() != 1015-fee {
+		t.Fatal("balance close error:", b.Get(), fee)
+	}
+	assert.Equal(t, profit, 14.68125)
+	assert.Equal(t, fee, 0.31875)
+	assert.Equal(t, profitRate, profit/avgPrice)
+	t.Log(profit, profitRate, onceFee, err, fee, profit/avgPrice)
+	b.Set(1000)
+	b.AddTrade(openTrade)
+	b.AddTrade(openTrade2)
+	b.AddTrade(stopTrade)
+	fee = calFee(b.fee, openTrade, openTrade2, stopTrade)
+	if b.Get() != 975-fee {
+		t.Fatal("balance stop error:", b.Get())
 	}
 }
