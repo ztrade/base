@@ -46,19 +46,27 @@ func TestLong(t *testing.T) {
 	b := NewVBalance()
 	b.Set(1000)
 	b.AddTrade(openTrade)
-	b.AddTrade(closeTrade)
+	t.Log("balance1:", b.Get())
+	profit, _, _, err := b.AddTrade(closeTrade)
+	assert.NoError(t, err)
+	t.Log(profit)
+	t.Log("balance:", b.Get())
 	fee := calFee(b.fee, openTrade, closeTrade)
 	if b.Get() != 1010-fee {
 		t.Fatal("balance close error:", b.Get(), 1010-fee)
 	}
+	assert.Equal(t, profit, 10.0-fee)
 	b.Set(1000)
 	b.AddTrade(openTrade)
-	b.AddTrade(stopTrade)
-
+	profit, _, _, err = b.AddTrade(stopTrade)
+	assert.NoError(t, err)
+	t.Log(profit)
 	fee = calFee(b.fee, openTrade, stopTrade)
 	if b.Get() != 990-fee {
 		t.Fatal("balance stop error:", b.Get())
 	}
+	assert.Equal(t, profit, -10.0-fee)
+
 }
 
 func TestMultiLong(t *testing.T) {
@@ -138,18 +146,24 @@ func TestShort(t *testing.T) {
 	b := NewVBalance()
 	b.Set(1000)
 	b.AddTrade(openTrade)
-	b.AddTrade(closeTrade)
+	profit, _, _, err := b.AddTrade(closeTrade)
+	assert.NoError(t, err)
+	t.Log(profit)
 	fee := calFee(b.fee, openTrade, closeTrade)
 	if b.Get() != 1010-fee {
 		t.Fatal("balance close error:", b.Get(), 1010-fee)
 	}
+	assert.Equal(t, profit, 10.0-fee)
 	b.Set(1000)
 	b.AddTrade(openTrade)
-	b.AddTrade(stopTrade)
+	profit, _, _, err = b.AddTrade(stopTrade)
+	assert.NoError(t, err)
+	t.Log(profit)
 	fee = calFee(b.fee, openTrade, stopTrade)
 	if b.Get() != 990-fee {
 		t.Fatal("balance stop error:", b.Get())
 	}
+	assert.Equal(t, profit, -10.0-fee)
 }
 
 func TestMultiShort(t *testing.T) {

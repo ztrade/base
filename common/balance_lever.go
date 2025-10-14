@@ -10,8 +10,9 @@ var (
 )
 
 type LeverBalance struct {
-	vBalance *VBalance
-	total    decimal.Decimal
+	vBalance       *VBalance
+	total          decimal.Decimal
+	prevRoundTotal decimal.Decimal
 
 	//  开仓的总价值
 	lever decimal.Decimal
@@ -26,6 +27,7 @@ func NewLeverBalance() *LeverBalance {
 
 func (b *LeverBalance) Set(total float64) {
 	b.total = decimal.NewFromFloat(total)
+	b.prevRoundTotal = b.total
 	vTotal, _ := b.total.Mul(b.lever).Float64()
 	b.vBalance.Set(vTotal)
 }
@@ -107,16 +109,24 @@ func (b *LeverBalance) AddTrade(tr Trade) (profit, profitRate, onceFee float64, 
 			err = ErrNoBalance
 			return
 		}
+		profit, profitRate, onceFee, err = b.vBalance.AddTrade(tr)
+		b.total = b.total.Sub(onceCost)
+		return
 	} else {
 		liqPrice, isLiq := b.CheckLiquidation(tr.Price)
 		if isLiq {
 			tr.Price = liqPrice
+			// fmt.Println("liquidation price:", liqPrice)
 		}
 	}
 	profit, profitRate, onceFee, err = b.vBalance.AddTrade(tr)
 	if err != nil {
 		return
 	}
-	b.total = b.total.Add(decimal.NewFromFloat(profit)).Sub(decimal.NewFromFloat(onceFee))
+	if b.vBalance.position.IsZero() {
+		// recal total when close all position
+		b.total = b.prevRoundTotal.Add(decimal.NewFromFloat(profit))
+		b.prevRoundTotal = b.total
+	}
 	return
 }
