@@ -41,7 +41,7 @@ func CopyWithMainPkg(dst, src string) (err error) {
 			break
 		}
 		if pkgRegexp.MatchString(line) {
-			line = "package main"
+			line = "package main\n"
 		}
 		fDst.Write([]byte(line))
 	}

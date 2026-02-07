@@ -68,7 +68,7 @@ func (b *LeverBalance) CheckLiquidation(price float64) (liqPrice float64, isLiq 
 	case -1:
 		// liqPrice + liqPrice * fee = openPrice + openPrice/lever
 		// liqPrice *(1 + fee) = openPrice * (1 + 1/lever)
-		// liqPrice = (openPrice * (1 + 1/lever))/(1-fee)
+		// liqPrice = (openPrice * (1 + 1/lever))/(1+fee)
 		liqPrice, _ = openPrice.Add(openPrice.Div(b.lever)).Div(numOne.Add(fee)).Float64()
 		if price >= liqPrice {
 			isLiq = true

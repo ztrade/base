@@ -83,7 +83,7 @@ func (b *VBalance) AddTrade(tr Trade) (profit, profitRate, onceFee float64, err 
 	fee := cost.Mul(b.fee)
 	onceFee, _ = fee.Float64()
 	costAll, _ := cost.Add(fee).Float64()
-	if tr.Action.IsOpen() && costAll >= b.Get() {
+	if tr.Action.IsOpen() && costAll > b.Get() {
 		err = ErrNoBalance
 		return
 	}
@@ -103,6 +103,7 @@ func (b *VBalance) AddTrade(tr Trade) (profit, profitRate, onceFee float64, err 
 		b.total = b.total.Sub(cost).Sub(fee)
 	}
 	b.feeTotal = b.feeTotal.Add(fee)
+	// 注意：部分平仓时 b.total 不反映真实余额，仅在仓位完全归零后通过 shortCost-longCost 重新计算
 	// 计算盈利
 	if isPositionZero {
 		totalFee := fee.Add(b.prevFee)

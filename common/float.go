@@ -41,7 +41,7 @@ func FloatDiv(a, b float64) float64 {
 
 // FormatFloat format float with precision
 func FormatFloat(n float64, precision int) float64 {
-	str := fmt.Sprintf("%df", precision)
-	n2, _ := strconv.ParseFloat(fmt.Sprintf("%."+str, n), 64)
+	format := fmt.Sprintf("%%.%df", precision)
+	n2, _ := strconv.ParseFloat(fmt.Sprintf(format, n), 64)
 	return n2
 }

@@ -60,7 +60,7 @@ func ParseParams(str string, params []Param) (data ParamData, err error) {
 	for _, v := range params {
 		if v.ptr == nil {
 			data[v.Name] = sj.Get(v.Name).Interface()
-			return
+			continue
 		}
 		temp, ok = sj.CheckGet(v.Name)
 		if !ok {
