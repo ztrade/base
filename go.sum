@@ -24,6 +24,8 @@ github.com/ztrade/indicator v1.1.2 h1:ElTuWTZRjzoOw8+RlESszvsl/Uw2gaOdIBqE6isZeu
 github.com/ztrade/indicator v1.1.2/go.mod h1:6Eh2RrKaKU0dHoDD9M9wUq12EGTWJi7WlpMHJoKb8Po=
 github.com/ztrade/trademodel v1.1.7 h1:9+5FYBMO2phzwBUNYMMM5e226KatazLy5odBv8Fs8xs=
 github.com/ztrade/trademodel v1.1.7/go.mod h1:iIdDUPeAjlmQ2D7dxqrwwFwGCFOdk35eogvWGkf+0Lw=
+github.com/ztrade/trademodel v1.1.8 h1:QFUfcRa8LOByBLB4q9jGH0fkGM0r0T07Lh0TsNtIX6g=
+github.com/ztrade/trademodel v1.1.8/go.mod h1:iIdDUPeAjlmQ2D7dxqrwwFwGCFOdk35eogvWGkf+0Lw=
 golang.org/x/sys v0.40.0 h1:DBZZqJ2Rkml6QMQsZywtnjnnGvHza6BTfYFWY9kjEWQ=
 golang.org/x/sys v0.40.0/go.mod h1:OgkHotnGiDImocRcuBABYBEXf8A9a87e/uXjp9XT3ks=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=

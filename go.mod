@@ -8,7 +8,7 @@ require (
 	github.com/sirupsen/logrus v1.9.4
 	github.com/stretchr/testify v1.11.1
 	github.com/ztrade/indicator v1.1.2
-	github.com/ztrade/trademodel v1.1.7
+	github.com/ztrade/trademodel v1.1.8
 )
 
 require (
