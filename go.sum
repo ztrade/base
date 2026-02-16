@@ -22,6 +22,10 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/ztrade/indicator v1.1.2 h1:ElTuWTZRjzoOw8+RlESszvsl/Uw2gaOdIBqE6isZeuI=
 github.com/ztrade/indicator v1.1.2/go.mod h1:6Eh2RrKaKU0dHoDD9M9wUq12EGTWJi7WlpMHJoKb8Po=
+github.com/ztrade/indicator v1.1.5 h1:q7p9+Hmt/nl/K64H8ZJgJ+Z9QuQhZheMz/wfVPYqRKk=
+github.com/ztrade/indicator v1.1.5/go.mod h1:6Eh2RrKaKU0dHoDD9M9wUq12EGTWJi7WlpMHJoKb8Po=
+github.com/ztrade/indicator v1.1.6 h1:WydjS+i45yVjFiPknIB1ORgbYGcn0sXYkf4399NyxYw=
+github.com/ztrade/indicator v1.1.6/go.mod h1:6Eh2RrKaKU0dHoDD9M9wUq12EGTWJi7WlpMHJoKb8Po=
 github.com/ztrade/trademodel v1.1.7 h1:9+5FYBMO2phzwBUNYMMM5e226KatazLy5odBv8Fs8xs=
 github.com/ztrade/trademodel v1.1.7/go.mod h1:iIdDUPeAjlmQ2D7dxqrwwFwGCFOdk35eogvWGkf+0Lw=
 github.com/ztrade/trademodel v1.1.8 h1:QFUfcRa8LOByBLB4q9jGH0fkGM0r0T07Lh0TsNtIX6g=
