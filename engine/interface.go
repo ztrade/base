@@ -26,6 +26,7 @@ type Engine interface {
 	Position() (pos, price float64)
 	Balance() float64
 	Log(v ...interface{})
+	GetLog() []string
 	Watch(watchType string)
 	SendNotify(title, content, contentType string)
 	Merge(src, dst string, fn common.CandleFn)
